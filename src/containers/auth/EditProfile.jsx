@@ -1,3 +1,4 @@
+/* eslint-disable no-empty-pattern */
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import { app, auth, storage } from 'firebase.config';
 import { getAuth, updateProfile } from 'firebase/auth';
@@ -13,9 +14,14 @@ import { Loader } from 'components';
 import toast, { Toaster } from 'react-hot-toast';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import LoadingIcon from 'assets/icons/loading';
+import { getAllFoodItems } from 'utils/firebaseFunctions';
+import { useStateValue } from 'context/StateProvider';
+import { actionType } from 'context/reducer';
 // import { collection, doc, updateDoc } from 'firebase/firestore';
 
 const EditProfile = () => {
+  console.log('getAllFoodItems', getAllFoodItems);
+  const [{}, dispatch] = useStateValue();
   const firebaseAuth = getAuth(app);
   const [user, loading] = useAuthState(auth);
 
@@ -83,7 +89,7 @@ const EditProfile = () => {
     setLoadingSubmit(true);
     const deleteRef = ref(storage, user?.photoURL);
 
-    if (user?.photoURL) {
+    if (user?.photoURL && imageAsset) {
       deleteObject(deleteRef);
     }
 
@@ -91,7 +97,7 @@ const EditProfile = () => {
       displayName: name ? name : user?.displayName,
       photoURL: imageAsset === null ? user?.photoURL : imageAsset,
     })
-      .then(async () => {
+      .then(() => {
         setLoadingSubmit(false);
         toast.success('Profil berhasil diubah 😊', {
           style: {
@@ -101,10 +107,18 @@ const EditProfile = () => {
             fontSize: '12px',
           },
         });
+        setImageAsset(null);
 
-        setTimeout(() => {
-          window.location.reload();
-        }, 2000);
+        getAllFoodItems().then((data) => {
+          dispatch({
+            type: actionType.SET_FOOD_ITEMS,
+            foodItems: data,
+          });
+          dispatch({
+            type: actionType.SET_LOADING_DATA,
+            loadingData: false,
+          });
+        });
       })
       .catch((error) => {
         setLoadingSubmit(false);

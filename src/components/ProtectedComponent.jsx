@@ -17,17 +17,11 @@ const ProtectedComponent = ({ children }) => {
     }
   }, [user, navigate]);
 
-  // Apabila kondisinya masih dalam tahap loading, kita berikan halaman kosong
   if (isLoading) {
     return;
   } else {
-    // Bila tidak isLoading (berarti sudah selesai)
-    // Kita kembalikan children yang ingin dirender
     return children;
   }
-
-  // // Apabila semua baik baik saja, kita akan mengembalikan children
-  // return isLoading ? "" : children;
 };
 
 export default ProtectedComponent;

@@ -17,6 +17,8 @@ import { app } from 'firebase.config';
 import ProtectedComponent from 'components/ProtectedComponent';
 import FoodyLoader from 'components/FoodyLoader';
 import { motion } from 'framer-motion';
+import ProductDetail from 'containers/ProductDetail';
+import Footer from 'components/Footer';
 
 const App = () => {
   const [{ loadingData }, dispatch] = useStateValue();
@@ -90,12 +92,22 @@ const App = () => {
                   </ProtectedComponent>
                 }
               />
+              <Route
+                path='/detail/:id'
+                element={
+                  <ProtectedComponent>
+                    <ProductDetail />
+                  </ProtectedComponent>
+                }
+              />
               <Route path='/login' element={<Login />} />
               <Route path='/register' element={<Register />} />
               <Route path='/edit-profile' element={<EditProfile />} />
               <Route path='/*' element={<NotFound />} />
             </Routes>
           </main>
+
+          <Footer />
         </motion.div>
       )}
     </AnimatePresence>
