@@ -32,7 +32,14 @@ const Header = () => {
       .then(() => {
         setIsMenu(false);
         localStorage.clear();
-
+        toast.success('Sampai jumpa lagi 😊', {
+          style: {
+            borderRadius: '10px',
+            background: '#333',
+            color: '#fff',
+            fontSize: '12px',
+          },
+        });
         dispatch({
           type: actionType.SET_USER,
           user: null,
@@ -75,7 +82,7 @@ const Header = () => {
             className='flex items-center gap-24 '
           >
             <li className='text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer'>
-              Blog
+              <Link to='/blog'>Blog</Link>
             </li>
             {/* <li className='text-lg text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer'>
               Menu
@@ -151,7 +158,7 @@ const Header = () => {
                       className='px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-100 transition-all duration-100 ease-in-out text-textColor text-base'
                       onClick={() => setIsMenu(false)}
                     >
-                      New Item <MdAdd />
+                      Data Baru <MdAdd />
                     </p>
                   </Link>
                 )}
@@ -160,7 +167,7 @@ const Header = () => {
                   className='px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-100 transition-all duration-100 ease-in-out text-textColor text-base'
                   onClick={logout}
                 >
-                  Logout <MdLogout />
+                  Keluar <MdLogout />
                 </p>
               </motion.div>
             )}
@@ -212,16 +219,24 @@ const Header = () => {
               exit={{ opacity: 0, scale: 0.6 }}
               className='w-40 bg-gray-50 shadow-xl rounded-lg flex flex-col absolute top-12 right-0'
             >
+              <Link to={'/edit-profile'}>
+                <p
+                  className='px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-100 transition-all duration-100 ease-in-out text-textColor text-base'
+                  onClick={() => setIsMenu(false)}
+                >
+                  Ubah Profil
+                </p>
+              </Link>
               {user && isAdmin && (
                 <Link to={'/createItem'}>
                   <p className='px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-100 transition-all duration-100 ease-in-out text-textColor text-base'>
-                    New Item <MdAdd />
+                    Data Baru <MdAdd />
                   </p>
                 </Link>
               )}
 
               <ul className='flex flex-col '>
-                <li
+                {/* <li
                   className='text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer hover:bg-slate-100 px-4 py-2'
                   onClick={() => setIsMenu(false)}
                 >
@@ -244,6 +259,12 @@ const Header = () => {
                   onClick={() => setIsMenu(false)}
                 >
                   Service
+                </li> */}
+                <li
+                  className='text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer hover:bg-slate-100 px-4 py-2'
+                  onClick={() => setIsMenu(false)}
+                >
+                  <Link to='/blog'>Blog</Link>
                 </li>
               </ul>
 
@@ -251,7 +272,7 @@ const Header = () => {
                 className='m-2 p-2 rounded-md shadow-md flex items-center justify-center bg-gray-200 gap-3 cursor-pointer hover:bg-gray-300 transition-all duration-100 ease-in-out text-textColor text-base'
                 onClick={logout}
               >
-                Logout <MdLogout />
+                Keluar <MdLogout />
               </p>
             </motion.div>
           )}

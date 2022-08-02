@@ -19,6 +19,7 @@ import FoodyLoader from 'components/FoodyLoader';
 import { motion } from 'framer-motion';
 import ProductDetail from 'containers/ProductDetail';
 import Footer from 'components/Footer';
+import Blog from 'containers/Blog';
 
 const App = () => {
   const [{ loadingData }, dispatch] = useStateValue();
@@ -103,6 +104,7 @@ const App = () => {
               <Route path='/login' element={<Login />} />
               <Route path='/register' element={<Register />} />
               <Route path='/edit-profile' element={<EditProfile />} />
+              <Route path='/blog' element={<Blog />} />
               <Route path='/*' element={<NotFound />} />
             </Routes>
           </main>
