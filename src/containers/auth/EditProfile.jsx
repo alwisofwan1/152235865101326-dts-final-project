@@ -17,10 +17,8 @@ import LoadingIcon from 'assets/icons/loading';
 import { getAllFoodItems } from 'utils/firebaseFunctions';
 import { useStateValue } from 'context/StateProvider';
 import { actionType } from 'context/reducer';
-// import { collection, doc, updateDoc } from 'firebase/firestore';
 
 const EditProfile = () => {
-  console.log('getAllFoodItems', getAllFoodItems);
   const [{}, dispatch] = useStateValue();
   const firebaseAuth = getAuth(app);
   const [user, loading] = useAuthState(auth);

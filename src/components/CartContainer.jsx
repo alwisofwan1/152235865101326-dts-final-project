@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { MdOutlineKeyboardBackspace } from 'react-icons/md';
 import { RiRefreshFill } from 'react-icons/ri';
-
 import { motion } from 'framer-motion';
 import { useStateValue } from '../context/StateProvider';
 import { actionType } from '../context/reducer';
-import EmptyCart from 'assets/img/emptyCart.svg';
+import { MdOutlineEmojiFoodBeverage } from 'react-icons/md';
 import CartItem from './CartItem';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from 'firebase.config';
@@ -127,7 +126,8 @@ const CartContainer = () => {
         </div>
       ) : (
         <div className='w-full h-full flex flex-col items-center justify-center gap-6'>
-          <img src={EmptyCart} className='w-300' alt='' />
+          {/* <img src={EmptyCart} className='w-300' alt='' /> */}
+          <MdOutlineEmojiFoodBeverage size={80} />
           <p className='text-xl text-textColor font-semibold'>
             Oops, keranjang kosong nih
           </p>

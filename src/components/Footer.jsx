@@ -13,7 +13,7 @@ const social = [
 ];
 
 const Footer = () => (
-  <footer className='flex items-center justify-center w-full px-16 bg-white shadow-footer py-30px lg:px-35px lg:justify-between'>
+  <footer className='flex items-center justify-center w-full px-16 bg-white shadow-footer py-30px lg:px-35px lg:justify-between mt-4'>
     <p className='text-gray-900 text-center'>
       Copyright &copy; {new Date().getFullYear()}{' '}
       <Link

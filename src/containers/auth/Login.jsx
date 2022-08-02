@@ -83,7 +83,8 @@ const Login = () => {
                   <div className='md:p-12 md:mx-6 pt-8'>
                     <div className='text-center'>
                       <h4 className='text-xl font-semibold mt-1 mb-12 pb-1'>
-                        We are Foody Yummy
+                        We are <span className='text-orange-500'>Foody</span>{' '}
+                        Yummy
                       </h4>
                     </div>
 

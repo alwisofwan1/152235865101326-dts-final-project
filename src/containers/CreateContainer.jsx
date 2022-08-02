@@ -1,6 +1,6 @@
+/* eslint-disable no-empty-pattern */
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
 
 import {
   MdFastfood,
@@ -21,18 +21,18 @@ import { storage } from '../firebase.config';
 import { getAllFoodItems, saveItem } from '../utils/firebaseFunctions';
 import { actionType } from '../context/reducer';
 import { useStateValue } from '../context/StateProvider';
+import toast, { Toaster } from 'react-hot-toast';
+import dayjs from 'dayjs';
 
 const CreateContainer = () => {
   const [title, setTitle] = useState('');
   const [calories, setCalories] = useState('');
   const [price, setPrice] = useState('');
+  const [description, setDescription] = useState('');
   const [category, setCategory] = useState(null);
   const [imageAsset, setImageAsset] = useState(null);
-  const [fields, setFields] = useState(false);
-  const [alertStatus, setAlertStatus] = useState('danger');
-  const [msg, setMsg] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [dispatch] = useStateValue();
+  const [{}, dispatch] = useStateValue();
 
   const uploadImage = (e) => {
     setIsLoading(true);
@@ -47,12 +47,15 @@ const CreateContainer = () => {
         //   (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
       },
       (error) => {
-        console.log(error);
-        setFields(true);
-        setMsg('Error while uploading : Try AGain 🙇');
-        setAlertStatus('danger');
+        toast.error('Kesalahan saat mengunggah: Coba lagi 🙇', {
+          style: {
+            borderRadius: '10px',
+            background: '#333',
+            color: '#fff',
+            fontSize: '12px',
+          },
+        });
         setTimeout(() => {
-          setFields(false);
           setIsLoading(false);
         }, 4000);
       },
@@ -60,12 +63,14 @@ const CreateContainer = () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
           setImageAsset(downloadURL);
           setIsLoading(false);
-          setFields(true);
-          setMsg('Image uploaded successfully 😊');
-          setAlertStatus('success');
-          setTimeout(() => {
-            setFields(false);
-          }, 4000);
+          toast.success('Gambar berhasil diunggah', {
+            style: {
+              borderRadius: '10px',
+              background: '#333',
+              color: '#fff',
+              fontSize: '12px',
+            },
+          });
         });
       }
     );
@@ -77,55 +82,70 @@ const CreateContainer = () => {
     deleteObject(deleteRef).then(() => {
       setImageAsset(null);
       setIsLoading(false);
-      setFields(true);
-      setMsg('Image deleted successfully 😊');
-      setAlertStatus('success');
-      setTimeout(() => {
-        setFields(false);
-      }, 4000);
+      toast.success('Gambar berhasil dihapus', {
+        style: {
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+          fontSize: '12px',
+        },
+      });
     });
   };
 
   const saveDetails = () => {
     setIsLoading(true);
     try {
-      if (!title || !calories || !imageAsset || !price || !category) {
-        setFields(true);
-        setMsg("Required fields can't be empty");
-        setAlertStatus('danger');
-        setTimeout(() => {
-          setFields(false);
-          setIsLoading(false);
-        }, 4000);
+      if (
+        !title ||
+        !calories ||
+        !imageAsset ||
+        !price ||
+        !category ||
+        !description
+      ) {
+        toast.error('Kolom wajib diisi tidak boleh kosong', {
+          style: {
+            borderRadius: '10px',
+            background: '#333',
+            color: '#fff',
+            fontSize: '12px',
+          },
+        });
       } else {
         const data = {
-          id: `${Date.now()}`,
           title: title,
           imageURL: imageAsset,
           category: category,
           calories: calories,
+          created_at: dayjs().format('DD MMMM YYYY, HH:mm:ss:sss'),
           qty: 1,
           price: price,
+          description: description,
         };
         saveItem(data);
         setIsLoading(false);
-        setFields(true);
-        setMsg('Data Uploaded successfully 😊');
-        setAlertStatus('success');
-        setTimeout(() => {
-          setFields(false);
-        }, 4000);
+        toast.success('Data berhasil ditambahkan 😊', {
+          style: {
+            borderRadius: '10px',
+            background: '#333',
+            color: '#fff',
+            fontSize: '12px',
+          },
+        });
+
         clearData();
       }
     } catch (error) {
       console.log(error);
-      setFields(true);
-      setMsg('Error while uploading : Try AGain 🙇');
-      setAlertStatus('danger');
-      setTimeout(() => {
-        setFields(false);
-        setIsLoading(false);
-      }, 4000);
+      toast.error('Kesalahan saat mengunggah: Coba lagi 🙇', {
+        style: {
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+          fontSize: '12px',
+        },
+      });
     }
 
     fetchData();
@@ -136,7 +156,8 @@ const CreateContainer = () => {
     setImageAsset(null);
     setCalories('');
     setPrice('');
-    setCategory('Select Category');
+    setDescription('');
+    setCategory('Pilih Kategori');
   };
 
   const fetchData = async () => {
@@ -151,21 +172,7 @@ const CreateContainer = () => {
   return (
     <div className='w-full min-h-screen flex items-center justify-center'>
       <div className='w-[90%] md:w-[50%] border border-gray-300 rounded-lg p-4 flex flex-col items-center justify-center gap-4'>
-        {fields && (
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className={`w-full p-2 rounded-lg text-center text-lg font-semibold ${
-              alertStatus === 'danger'
-                ? 'bg-red-400 text-red-800'
-                : 'bg-emerald-400 text-emerald-800'
-            }`}
-          >
-            {msg}
-          </motion.p>
-        )}
-
+        <Toaster />
         <div className='w-full py-2 border-b border-gray-300 flex items-center gap-2'>
           <MdFastfood className='text-xl text-gray-700' />
           <input
@@ -173,7 +180,7 @@ const CreateContainer = () => {
             required
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            placeholder='Give me a title...'
+            placeholder='Masukkan Judul'
             className='w-full h-full text-lg bg-transparent outline-none border-none placeholder:text-gray-400 text-textColor'
           />
         </div>
@@ -184,7 +191,7 @@ const CreateContainer = () => {
             className='outline-none w-full text-base border-b-2 border-gray-200 p-2 rounded-md cursor-pointer'
           >
             <option value='other' className='bg-white'>
-              Select Category
+              Pilih Kategori
             </option>
             {categories &&
               categories.map((item) => (
@@ -210,7 +217,7 @@ const CreateContainer = () => {
                     <div className='w-full h-full flex flex-col items-center justify-center gap-2'>
                       <MdCloudUpload className='text-gray-500 text-3xl hover:text-gray-700' />
                       <p className='text-gray-500 hover:text-gray-700'>
-                        Click here to upload
+                        Klik untuk upload
                       </p>
                     </div>
                     <input
@@ -252,7 +259,7 @@ const CreateContainer = () => {
               required
               value={calories}
               onChange={(e) => setCalories(e.target.value)}
-              placeholder='Calories'
+              placeholder='Kalori'
               className='w-full h-full text-lg bg-transparent outline-none border-none placeholder:text-gray-400 text-textColor'
             />
           </div>
@@ -264,19 +271,30 @@ const CreateContainer = () => {
               required
               value={price}
               onChange={(e) => setPrice(e.target.value)}
-              placeholder='Price'
+              placeholder='Harga'
               className='w-full h-full text-lg bg-transparent outline-none border-none placeholder:text-gray-400 text-textColor'
             />
           </div>
         </div>
 
+        <div className='w-full flex flex-col md:flex-row items-center gap-3'>
+          <textarea
+            id='message'
+            rows='6'
+            class='block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:outline-none'
+            placeholder='Deskripsi'
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+        </div>
+
         <div className='flex items-center w-full'>
           <button
             type='button'
-            className='ml-0 md:ml-auto w-full md:w-auto border-none outline-none bg-emerald-500 px-12 py-2 rounded-lg text-lg text-white font-semibold'
+            className='ml-0 md:ml-auto w-full md:w-auto border-none outline-none bg-orange-500 px-12 py-2 rounded-lg text-lg text-white font-semibold'
             onClick={saveDetails}
           >
-            Save
+            Tambah
           </button>
         </div>
       </div>
