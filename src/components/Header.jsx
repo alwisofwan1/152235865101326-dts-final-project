@@ -13,9 +13,9 @@ import toast, { Toaster } from 'react-hot-toast';
 const Header = () => {
   const [{ user, cartShow, cartItems }, dispatch] = useStateValue();
 
-  const isAdmin =
-    user?.email === 'alwisofwan567@gmail.com' ||
-    user?.email === 'admin@gmail.com';
+  // const isAdmin =
+  //   user?.email === 'alwisofwan567@gmail.com' ||
+  //   user?.email === 'admin@gmail.com';
 
   const [isMenu, setIsMenu] = useState(false);
 
@@ -152,7 +152,7 @@ const Header = () => {
                     Ubah Profil
                   </p>
                 </Link>
-                {user && isAdmin && (
+                {user && (
                   <Link to={'/createItem'}>
                     <p
                       className='px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-100 transition-all duration-100 ease-in-out text-textColor text-base'
@@ -227,7 +227,7 @@ const Header = () => {
                   Ubah Profil
                 </p>
               </Link>
-              {user && isAdmin && (
+              {user && (
                 <Link to={'/createItem'}>
                   <p className='px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-100 transition-all duration-100 ease-in-out text-textColor text-base'>
                     Data Baru <MdAdd />
