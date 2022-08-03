@@ -95,7 +95,6 @@ const ProductDetail = () => {
 
               <form
                 className='flex mt-12 mb-8 gap-2'
-                action='https://cartsy.redq.io/shop/organic-strawberries-1-pint-container/'
                 method='post'
                 encType='multipart/form-data'
               >
@@ -126,23 +125,15 @@ const ProductDetail = () => {
               >
                 <span className='text-[#5a5a5a] mb-[15px]'>
                   Kategori:{' '}
-                  <a
-                    href='https://cartsy.redq.io/product-category/fresh-fruits/berries/'
-                    rel='tag'
-                    className='text-[#212121] font-medium capitalize'
-                  >
+                  <span className='text-[#212121] font-medium capitalize'>
                     {data?.category}
-                  </a>
+                  </span>
                 </span>
                 <span className='text-[#5a5a5a] mb-[15px]'>
                   Kalori:{' '}
-                  <a
-                    href='https://cartsy.redq.io/product-category/fresh-fruits/berries/'
-                    rel='tag'
-                    className='text-[#212121] font-medium capitalize'
-                  >
+                  <span className='text-[#212121] font-medium capitalize'>
                     {data?.calories === '0' ? '-' : data?.calories}
-                  </a>
+                  </span>
                 </span>
               </div>
             </div>

@@ -1,42 +1,38 @@
 import PostLayout from 'components/blog/PostSimple';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
-// export async function getStaticPaths() {
-//   const posts = await sanityClient.fetch(query.articleSlug)
+export default function BlogDetail() {
+  const { key } = useParams();
 
-//   const paths = posts.map((post) => ({
-//     params: { slug: post.slug.current },
-//   }))
+  const baseUrl = 'https://masak-apa-tomorisakura.vercel.app';
+  const [isLoading, setIsLoading] = useState(true);
+  const [data, setData] = useState([]);
 
-//   return {
-//     paths,
-//     fallback: 'blocking',
-//   }
-// }
+  console.log('data', data);
 
-// export async function getStaticProps({ params }) {
-//   const relatedPost = await sanityClient.fetch(query.allArticle)
-//   const postIndex = relatedPost.findIndex((post) => post?.slug?.current === params.slug)
+  const getRecipeDetail = async () => {
+    setIsLoading(true);
+    try {
+      const response = await fetch(`${baseUrl}/api/recipe/${key}`);
+      const data = await response.json();
+      setIsLoading(false);
 
-//   const allPosts = await sanityClient.fetch(query.articleDetail, {
-//     slug: params?.slug,
-//   })
+      const { results } = data;
+      setData(results);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-//   const prev = relatedPost[postIndex - 1] || null
-//   const next = relatedPost[postIndex + 1] || null
+  useEffect(() => {
+    key && getRecipeDetail();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [key]);
 
-//   // rss
-//   if (relatedPost.length > 0) {
-//     const rss = generateRss(relatedPost)
-//     fs.writeFileSync('./public/feed.xml', rss)
-//   }
-
-//   return { props: { allPosts, prev, next }, revalidate: 60 }
-// }
-
-export default function Blog({ allPosts, prev, next }) {
   return (
     <>
-      <PostLayout frontMatter={allPosts} prev={1} next={2} />
+      <PostLayout data={data} prev={1} next={2} />
     </>
   );
 }

@@ -106,7 +106,7 @@ const App = () => {
               <Route path='/register' element={<Register />} />
               <Route path='/edit-profile' element={<EditProfile />} />
               <Route path='/blog' element={<Blog />} />
-              <Route path='/blog/:id' element={<BlogDetail />} />
+              <Route path='/blog/:key' element={<BlogDetail />} />
               <Route path='/*' element={<NotFound />} />
             </Routes>
           </main>

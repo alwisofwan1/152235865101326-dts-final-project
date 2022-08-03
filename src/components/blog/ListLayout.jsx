@@ -132,7 +132,7 @@ export default function ListLayout({
                         <div>
                           <h3 className='text-2xl font-bold leading-8 tracking-tight'>
                             <Link
-                              to={`/blog/${index}`}
+                              to={`/blog/${item?.key}`}
                               className='dark:text-gray-100 text-gray-900'
                             >
                               {item?.title}
@@ -149,7 +149,7 @@ export default function ListLayout({
                         <div className='mt-auto flex flex-row-reverse items-center justify-end'>
                           <Link
                             className='group dark:bg-slate-700 dark:text-slate-100 dark:hover:bg-slate-600 dark:hover:text-white dark:focus:ring-slate-500 inline-flex h-9 items-center whitespace-nowrap rounded-full bg-slate-100 px-3 text-sm font-semibold text-slate-700 hover:bg-slate-200 hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-500'
-                            to={`/blog/${index}`}
+                            to={`/blog/${item?.key}`}
                           >
                             Read more<span className='sr-only'>Read more</span>
                             <svg
