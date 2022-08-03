@@ -7,6 +7,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
 import LoadingIcon from 'assets/icons/loading';
+import { BiArrowBack } from 'react-icons/bi';
 
 const Register = () => {
   const firebaseAuth = getAuth(app);
@@ -148,10 +149,19 @@ const Register = () => {
                 >
                   <div className='text-white px-4 py-6 md:p-12 md:mx-6'>
                     <h4 className='text-xl font-semibold mb-6'>Food Yummy</h4>
-                    <p className='text-sm'>
+                    <p className='text-sm mb-6'>
                       "Diet kamu adalah rekening bank. Pilihan makanan yang baik
                       adalah investasi yang baik."
                     </p>
+
+                    <div>
+                      <Link
+                        to={'/'}
+                        className='flex items-center gap-1 text-sm'
+                      >
+                        <BiArrowBack /> Kembali ke beranda
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>
