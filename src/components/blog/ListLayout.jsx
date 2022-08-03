@@ -3,6 +3,7 @@ import Pagination from 'components/Pagination';
 import { useState } from 'react';
 import { MdClear } from 'react-icons/md';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 export default function ListLayout({
   posts,
@@ -107,64 +108,69 @@ export default function ListLayout({
             </div>
           ) : (
             posts.map((item, index) => {
-              // const { slug, _createdAt, title, summary, mainImage } = frontMatter;
-
               return (
-                <li key={index} className='py-4'>
-                  <article className='gap-6 space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0'>
-                    <dl>
-                      <dt className='sr-only'>Published on</dt>
-                      <dd className='dark:text-gray-400 hidden text-base font-medium leading-6 text-gray-500 lg:block'>
-                        <img
-                          src={item?.thumb}
-                          className='rounded-md object-cover'
-                          alt={'Tumis kacang panjang jamur'}
-                          style={{ minHeight: 150 }}
-                        />
-                      </dd>
-                    </dl>
-                    <div className='space-y-3 xl:col-span-3'>
-                      <div>
-                        <h3 className='text-2xl font-bold leading-8 tracking-tight'>
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                >
+                  <li className='py-4'>
+                    <article className='gap-6 space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0'>
+                      <dl>
+                        <dt className='sr-only'>Published on</dt>
+                        <dd className='dark:text-gray-400 hidden text-base font-medium leading-6 text-gray-500 lg:block'>
+                          <img
+                            src={item?.thumb}
+                            className='rounded-md object-cover'
+                            alt={'Tumis kacang panjang jamur'}
+                            style={{ minHeight: 150 }}
+                          />
+                        </dd>
+                      </dl>
+                      <div className='space-y-3 xl:col-span-3'>
+                        <div>
+                          <h3 className='text-2xl font-bold leading-8 tracking-tight'>
+                            <Link
+                              to={`/blog/${index}`}
+                              className='dark:text-gray-100 text-gray-900'
+                            >
+                              {item?.title}
+                            </Link>
+                          </h3>
+                          <div className='dark:text-gray-400 text-sm font-medium leading-6 text-gray-500'>
+                            {item?.dificulty}
+                          </div>
+                        </div>
+                        <div className='dark:text-gray-400 prose max-w-none text-gray-500 line-clamp-3'>
+                          {`Yuk kepoin resep masakan khas Indonesia.`}
+                        </div>
+
+                        <div className='mt-auto flex flex-row-reverse items-center justify-end'>
                           <Link
+                            className='group dark:bg-slate-700 dark:text-slate-100 dark:hover:bg-slate-600 dark:hover:text-white dark:focus:ring-slate-500 inline-flex h-9 items-center whitespace-nowrap rounded-full bg-slate-100 px-3 text-sm font-semibold text-slate-700 hover:bg-slate-200 hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-500'
                             to={`/blog/${index}`}
-                            className='dark:text-gray-100 text-gray-900'
                           >
-                            {item?.title}
+                            Read more<span className='sr-only'>Read more</span>
+                            <svg
+                              className='dark:text-slate-500 dark:group-hover:text-slate-400 ml-3 overflow-visible text-slate-300 group-hover:text-slate-400'
+                              width='3'
+                              height='6'
+                              viewBox='0 0 3 6'
+                              fill='none'
+                              stroke='currentColor'
+                              strokeWidth='2'
+                              strokeLinecap='round'
+                              strokeLinejoin='round'
+                            >
+                              <path d='M0 0L3 3L0 6'></path>
+                            </svg>
                           </Link>
-                        </h3>
-                        <div className='dark:text-gray-400 text-sm font-medium leading-6 text-gray-500'>
-                          {item?.dificulty}
                         </div>
                       </div>
-                      <div className='dark:text-gray-400 prose max-w-none text-gray-500 line-clamp-3'>
-                        {`Yuk kepoin resep masakan khas Indonesia.`}
-                      </div>
-
-                      <div className='mt-auto flex flex-row-reverse items-center justify-end'>
-                        <Link
-                          className='group dark:bg-slate-700 dark:text-slate-100 dark:hover:bg-slate-600 dark:hover:text-white dark:focus:ring-slate-500 inline-flex h-9 items-center whitespace-nowrap rounded-full bg-slate-100 px-3 text-sm font-semibold text-slate-700 hover:bg-slate-200 hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-500'
-                          to={`/blog/${index}`}
-                        >
-                          Read more<span className='sr-only'>Read more</span>
-                          <svg
-                            className='dark:text-slate-500 dark:group-hover:text-slate-400 ml-3 overflow-visible text-slate-300 group-hover:text-slate-400'
-                            width='3'
-                            height='6'
-                            viewBox='0 0 3 6'
-                            fill='none'
-                            stroke='currentColor'
-                            strokeWidth='2'
-                            strokeLinecap='round'
-                            strokeLinejoin='round'
-                          >
-                            <path d='M0 0L3 3L0 6'></path>
-                          </svg>
-                        </Link>
-                      </div>
-                    </div>
-                  </article>
-                </li>
+                    </article>
+                  </li>
+                </motion.div>
               );
             })
           )}

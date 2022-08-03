@@ -20,6 +20,7 @@ import { motion } from 'framer-motion';
 import ProductDetail from 'containers/ProductDetail';
 import Footer from 'components/Footer';
 import Blog from 'containers/Blog';
+import BlogDetail from 'containers/BlogDetail';
 
 const App = () => {
   const [{ loadingData }, dispatch] = useStateValue();
@@ -105,6 +106,7 @@ const App = () => {
               <Route path='/register' element={<Register />} />
               <Route path='/edit-profile' element={<EditProfile />} />
               <Route path='/blog' element={<Blog />} />
+              <Route path='/blog/:id' element={<BlogDetail />} />
               <Route path='/*' element={<NotFound />} />
             </Routes>
           </main>
