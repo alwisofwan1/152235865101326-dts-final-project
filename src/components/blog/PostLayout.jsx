@@ -1,13 +1,6 @@
-import { auth } from 'firebase.config';
-import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
 
-export default function PostLayout({ data, next, prev }) {
-  console.log('data', data);
-
-  const [user] = useAuthState(auth);
-  console.log('user', user);
-
+export default function PostLayout({ data }) {
   return (
     <div className='mx-auto max-w-4xl px-4 sm:px-6 xl:max-w-5xl xl:px-0'>
       <article>
@@ -45,7 +38,7 @@ export default function PostLayout({ data, next, prev }) {
                           <h2 className='dark:text-gray-400 mb-1 text-xs uppercase tracking-wide text-gray-500'>
                             Diterbitkan Oleh:
                           </h2>
-                          <div className='xl:flex xl:flex-wrap'>
+                          <div className='flex justify-center xl:justify-start xl:flex xl:flex-wrap'>
                             {data?.author?.user}
                           </div>
                         </div>
@@ -65,7 +58,32 @@ export default function PostLayout({ data, next, prev }) {
                   </figure>
                 )}
 
-                <p dangerouslySetInnerHTML={{ __html: data?.desc }} />
+                <div dangerouslySetInnerHTML={{ __html: data?.desc }} />
+
+                <div className='mt-3'>
+                  <h2 className='font-semibold text-lg mb-2'>
+                    Bahan yang digunakan
+                  </h2>
+
+                  <ul className='list-disc ml-5'>
+                    {data?.ingredient?.map((item, index) => (
+                      <li key={index} className='leading-relaxed'>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className='mt-3'>
+                  <h2 className='font-semibold text-lg mb-2'>Cara Membuat</h2>
+
+                  <ul className='list-disc ml-5'>
+                    {data?.step?.map((item, index) => (
+                      <li key={index} className='leading-relaxed'>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </div>
             <footer>

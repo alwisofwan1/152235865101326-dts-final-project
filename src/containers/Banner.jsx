@@ -10,11 +10,9 @@ export default function CallToAction() {
     >
       <div className='w-full text-center'>
         <h2 className='text-[#212121] text-2xl font-medium lg:text-4xl mb-4'>
-          Yuk Makan Yuuk
+          Yuk Makan Yuk
         </h2>
-        <div className='text-[#5A5A5A] mb-4'>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit
-        </div>
+        <div className='text-[#5A5A5A] mb-4'>Eat right, live right</div>
 
         <div className='w-full ml-10px mr-20px lg:mr-10 lg:ml-auto lg:flex lg:justify-center'>
           <Search className='border-2' />

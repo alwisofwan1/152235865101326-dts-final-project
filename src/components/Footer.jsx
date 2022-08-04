@@ -6,7 +6,7 @@ const social = [
   {
     id: 1,
     link: metaData.instagram,
-    icon: <FiInstagram />,
+    icon: <FiInstagram size={20} />,
     className: 'instagram',
     title: 'instagram',
   },
