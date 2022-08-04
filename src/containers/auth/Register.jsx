@@ -54,7 +54,7 @@ const Register = () => {
               JSON.stringify({ ...user?.providerData[0], displayName: name })
             );
 
-            navigate('/login', { replace: true });
+            navigate('/', { replace: true });
           });
         })
         .catch((error) => {
