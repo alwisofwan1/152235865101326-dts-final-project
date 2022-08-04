@@ -57,7 +57,7 @@ const RowContainer = ({ data, scrollValue }) => {
                   <div className='flex justify-center items-center relative h-[180px]'>
                     <Link
                       to={`/detail/${item?.id}`}
-                      className='items-center justify-center w-full h-full relative text-[#212121] flex'
+                      className='items-center justify-center w-full h-full relative text-[#212121] flex pt-2'
                     >
                       <img
                         className='rounded-none h-auto w-auto max-w-full max-h-full mb-0'
