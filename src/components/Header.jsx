@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { MdAdd, MdLogout, MdShoppingBasket } from 'react-icons/md';
 import { motion } from 'framer-motion';
 import Avatar from 'assets/img/avatar.png';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useStateValue } from '../context/StateProvider';
 import { actionType } from '../context/reducer';
 import { FiLogIn } from 'react-icons/fi';
@@ -12,6 +12,7 @@ import toast, { Toaster } from 'react-hot-toast';
 
 const Header = () => {
   const [{ user, cartShow, cartItems }, dispatch] = useStateValue();
+  const navigate = useNavigate();
 
   // const isAdmin =
   //   user?.email === 'alwisofwan567@gmail.com' ||
@@ -43,6 +44,9 @@ const Header = () => {
         dispatch({
           type: actionType.SET_USER,
           user: null,
+        });
+        navigate('/', {
+          replace: true,
         });
       })
       .catch((error) => {
@@ -84,15 +88,6 @@ const Header = () => {
             <li className='text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer'>
               <Link to='/blog'>Blog</Link>
             </li>
-            {/* <li className='text-lg text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer'>
-              Menu
-            </li>
-            <li className='text-lg text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer'>
-              About Us
-            </li>
-            <li className='text-lg text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer'>
-              Service
-            </li> */}
           </motion.ul>
 
           <div
@@ -236,30 +231,6 @@ const Header = () => {
               )}
 
               <ul className='flex flex-col '>
-                {/* <li
-                  className='text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer hover:bg-slate-100 px-4 py-2'
-                  onClick={() => setIsMenu(false)}
-                >
-                  Home
-                </li>
-                <li
-                  className='text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer hover:bg-slate-100 px-4 py-2'
-                  onClick={() => setIsMenu(false)}
-                >
-                  Menu
-                </li>
-                <li
-                  className='text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer hover:bg-slate-100 px-4 py-2'
-                  onClick={() => setIsMenu(false)}
-                >
-                  About Us
-                </li>
-                <li
-                  className='text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer hover:bg-slate-100 px-4 py-2'
-                  onClick={() => setIsMenu(false)}
-                >
-                  Service
-                </li> */}
                 <li
                   className='text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer hover:bg-slate-100 px-4 py-2'
                   onClick={() => setIsMenu(false)}
