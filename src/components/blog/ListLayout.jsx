@@ -151,7 +151,8 @@ export default function ListLayout({
                             className='group dark:bg-slate-700 dark:text-slate-100 dark:hover:bg-slate-600 dark:hover:text-white dark:focus:ring-slate-500 inline-flex h-9 items-center whitespace-nowrap rounded-full bg-slate-100 px-3 text-sm font-semibold text-slate-700 hover:bg-slate-200 hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-500'
                             to={`/blog/${item?.key}`}
                           >
-                            Read more<span className='sr-only'>Read more</span>
+                            Selengkapnya
+                            <span className='sr-only'>Selengkapnya</span>
                             <svg
                               className='dark:text-slate-500 dark:group-hover:text-slate-400 ml-3 overflow-visible text-slate-300 group-hover:text-slate-400'
                               width='3'

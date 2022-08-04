@@ -1,6 +1,8 @@
-import PostLayout from 'components/blog/PostSimple';
+import { Loader } from 'components';
+import PostLayout from 'components/blog/PostLayout';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 export default function BlogDetail() {
   const { key } = useParams();
@@ -8,8 +10,6 @@ export default function BlogDetail() {
   const baseUrl = 'https://masak-apa-tomorisakura.vercel.app';
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState([]);
-
-  console.log('data', data);
 
   const getRecipeDetail = async () => {
     setIsLoading(true);
@@ -30,9 +30,26 @@ export default function BlogDetail() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [key]);
 
+  // Handle buat scroll to top ketika loading page
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [isLoading]);
+
   return (
     <>
-      <PostLayout data={data} prev={1} next={2} />
+      {isLoading ? (
+        <div className='grid place-items-center min-h-[75vh]'>
+          <Loader />
+        </div>
+      ) : (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+        >
+          <PostLayout data={data} />
+        </motion.div>
+      )}
     </>
   );
 }

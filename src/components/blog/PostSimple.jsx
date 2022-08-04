@@ -1,10 +1,9 @@
 // import { Link } from 'react-router-dom';
 // import { motion } from 'framer-motion';
 
-export default function PostLayout({ data, next, prev }) {
-  console.log('data', data);
+export default function PostLayout({ data }) {
   return (
-    <div className='mx-auto max-w-5xl px-4 sm:px-6 xl:max-w-6xl xl:px-0'>
+    <div className='mx-auto max-w-3xl px-4 sm:px-6 xl:max-w-4xl xl:px-0'>
       <article>
         <div>
           <header>
@@ -18,7 +17,7 @@ export default function PostLayout({ data, next, prev }) {
                 </div>
               </dl>
               <div>
-                <h1 className='dark:text-gray-100 text-2xl font-bold leading-9 tracking-tight text-gray-900 sm:text-3xl sm:leading-10 md:text-4xl md:leading-14'>
+                <h1 className='dark:text-gray-100 text-2xl font-bold leading-9 tracking-tight text-gray-900 sm:text-2xl sm:leading-10 md:text-3xl md:leading-14'>
                   {data?.title}
                 </h1>
               </div>
@@ -55,7 +54,8 @@ export default function PostLayout({ data, next, prev }) {
                 <span className='text-[#5a5a5a] mb-[15px]'>
                   Yang harus disiapkan:{' '}
                   <span className='text-[#212121] font-medium capitalize'>
-                    {data?.needItem[0]?.item_name}
+                    {data?.needItem?.map((item) => item.item_name).join(', ') ||
+                      '-'}
                   </span>
                 </span>
                 <span className='text-[#5a5a5a] mb-[15px]'>
@@ -75,10 +75,10 @@ export default function PostLayout({ data, next, prev }) {
           </div>
 
           <div className='dark:divide-gray-700 divide-y divide-gray-200 xl:col-span-3 xl:row-span-2 xl:pb-0'>
-            <div className='dark:prose-dark prose max-w-none pt-8 pb-8'>
-              <p>{data?.desc}</p>
-              <br />
-              <p>{data?.desc}</p>
+            <div className='mt-8 prose prose-slate dark:prose-dark text-[#5a5a5a] text-[16px]'>
+              <p dangerouslySetInnerHTML={{ __html: data?.desc }} />
+              {/* <br />
+              <p>{data?.desc}</p> */}
             </div>
           </div>
         </div>
