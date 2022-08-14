@@ -94,12 +94,12 @@ const Login = () => {
                       <p className='mb-2'>Silahkan masuk ke akun anda</p>
                       <div className='text-center pt-1 pb-5 border-b mb-7'>
                         <button
-                          className='relative w-full inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-1 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800'
+                          className='relative w-full inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white focus:ring-1 focus:outline-none focus:ring-pink-200'
                           onClick={(e) => {
                             loginSocmed();
                           }}
                         >
-                          <span className='flex justify-center items-center gap-2 relative w-full px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0'>
+                          <span className='flex justify-center items-center gap-2 relative w-full px-5 py-2.5 transition-all ease-in duration-75 bg-white rounded-md group-hover:bg-opacity-0'>
                             <TbBrandGoogle size={18} /> Masuk Dengan Google
                           </span>
                         </button>

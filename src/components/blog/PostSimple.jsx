@@ -7,17 +7,17 @@ export default function PostLayout({ data }) {
       <article>
         <div>
           <header>
-            <div className='dark:border-gray-700 space-y-1 border-b border-gray-200 pb-10 text-center'>
+            <div className='space-y-1 border-b border-gray-200 pb-10 text-center'>
               <dl>
                 <div>
                   <dt className='sr-only'>Published on</dt>
-                  <dd className='dark:text-gray-400 text-base font-medium leading-6 text-gray-500'>
+                  <dd className='text-base font-medium leading-6 text-gray-500'>
                     {data?.author?.datePublished}
                   </dd>
                 </div>
               </dl>
               <div>
-                <h1 className='dark:text-gray-100 text-2xl font-bold leading-9 tracking-tight text-gray-900 sm:text-2xl sm:leading-10 md:text-3xl md:leading-14'>
+                <h1 className='text-2xl font-bold leading-9 tracking-tight text-gray-900 sm:text-2xl sm:leading-10 md:text-3xl md:leading-14'>
                   {data?.title}
                 </h1>
               </div>
@@ -74,8 +74,8 @@ export default function PostLayout({ data }) {
             </div>
           </div>
 
-          <div className='dark:divide-gray-700 divide-y divide-gray-200 xl:col-span-3 xl:row-span-2 xl:pb-0'>
-            <div className='mt-8 prose prose-slate dark:prose-dark text-[#5a5a5a] text-[16px]'>
+          <div className='divide-y divide-gray-200 xl:col-span-3 xl:row-span-2 xl:pb-0'>
+            <div className='mt-8 prose prose-slate text-[#5a5a5a] text-[16px]'>
               <p dangerouslySetInnerHTML={{ __html: data?.desc }} />
               {/* <br />
               <p>{data?.desc}</p> */}

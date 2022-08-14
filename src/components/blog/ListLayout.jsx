@@ -25,22 +25,22 @@ export default function ListLayout({
     <>
       <div className='divide-y'>
         <div className='space-y-2 pt-6 pb-8 md:space-y-5'>
-          <h1 className='dark:text-slate-200 mb-4 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl'>
+          <h1 className='mb-4 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl'>
             {title}
           </h1>
 
           <form
-            class='flex items-center relative max-w-lg'
+            className='flex items-center relative max-w-lg'
             onSubmit={handleSearch}
           >
-            <label for='search' class='sr-only'>
+            <label for='search' className='sr-only'>
               Search
             </label>
-            <div class='relative w-full'>
-              <div class='flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none'>
+            <div className='relative w-full'>
+              <div className='flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none'>
                 <svg
                   aria-hidden='true'
-                  class='w-5 h-5 text-gray-500 dark:text-gray-400'
+                  className='w-5 h-5 text-gray-500'
                   fill='currentColor'
                   viewBox='0 0 20 20'
                   xmlns='http://www.w3.org/2000/svg'
@@ -56,7 +56,7 @@ export default function ListLayout({
                 type='text'
                 id='search'
                 name='search'
-                class='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5'
                 placeholder='Cari resep makanan'
                 onChange={(e) => setSearchData(e.target.value)}
                 value={searchData}
@@ -64,10 +64,10 @@ export default function ListLayout({
             </div>
             <button
               type='submit'
-              class='p-2.5 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
+              className='p-2.5 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300'
             >
               <svg
-                class='w-5 h-5'
+                className='w-5 h-5'
                 fill='none'
                 stroke='currentColor'
                 viewBox='0 0 24 24'
@@ -76,23 +76,23 @@ export default function ListLayout({
                 <path
                   stroke-linecap='round'
                   stroke-linejoin='round'
-                  stroke-width='2'
+                  strokeWidth='2'
                   d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z'
                 ></path>
               </svg>
-              <span class='sr-only'>Search</span>
+              <span className='sr-only'>Search</span>
             </button>
             {searchValue && (
               <button
                 type='submit'
-                class='p-2.5 ml-2 text-sm font-medium text-white bg-red-700 rounded-lg border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800'
+                className='p-2.5 ml-2 text-sm font-medium text-white bg-red-700 rounded-lg border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300'
                 onClick={() => {
                   setSearchValue('');
                   setSearchData('');
                 }}
               >
                 <MdClear size={20} />
-                <span class='sr-only'>Clear</span>
+                <span className='sr-only'>Clear</span>
               </button>
             )}
           </form>
@@ -119,7 +119,7 @@ export default function ListLayout({
                     <article className='gap-6 space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0'>
                       <dl>
                         <dt className='sr-only'>Published on</dt>
-                        <dd className='dark:text-gray-400 hidden text-base font-medium leading-6 text-gray-500 lg:block'>
+                        <dd className='hidden text-base font-medium leading-6 text-gray-500 lg:block'>
                           <img
                             src={item?.thumb}
                             className='rounded-md object-cover'
@@ -133,28 +133,28 @@ export default function ListLayout({
                           <h3 className='text-2xl font-bold leading-8 tracking-tight'>
                             <Link
                               to={`/blog/${item?.key}`}
-                              className='dark:text-gray-100 text-gray-900'
+                              className='text-gray-900'
                             >
                               {item?.title}
                             </Link>
                           </h3>
-                          <div className='dark:text-gray-400 text-sm font-medium leading-6 text-gray-500'>
+                          <div className='text-sm font-medium leading-6 text-gray-500'>
                             {item?.dificulty}
                           </div>
                         </div>
-                        <div className='dark:text-gray-400 prose max-w-none text-gray-500 line-clamp-3'>
+                        <div className='prose max-w-none text-gray-500 line-clamp-3'>
                           {`Yuk kepoin resep masakan khas Indonesia.`}
                         </div>
 
                         <div className='mt-auto flex flex-row-reverse items-center justify-end'>
                           <Link
-                            className='group dark:bg-slate-700 dark:text-slate-100 dark:hover:bg-slate-600 dark:hover:text-white dark:focus:ring-slate-500 inline-flex h-9 items-center whitespace-nowrap rounded-full bg-slate-100 px-3 text-sm font-semibold text-slate-700 hover:bg-slate-200 hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-500'
+                            className='group inline-flex h-9 items-center whitespace-nowrap rounded-full bg-slate-100 px-3 text-sm font-semibold text-slate-700 hover:bg-slate-200 hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-500'
                             to={`/blog/${item?.key}`}
                           >
                             Selengkapnya
                             <span className='sr-only'>Selengkapnya</span>
                             <svg
-                              className='dark:text-slate-500 dark:group-hover:text-slate-400 ml-3 overflow-visible text-slate-300 group-hover:text-slate-400'
+                              className='ml-3 overflow-visible text-slate-300 group-hover:text-slate-400'
                               width='3'
                               height='6'
                               viewBox='0 0 3 6'
